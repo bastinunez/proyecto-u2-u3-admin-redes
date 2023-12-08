@@ -7,3 +7,4 @@
 [08/Dec/2023:17:13:36 +0000] 400 - - http localhost-nginx-proxy-manager "-" [Client 198.199.104.83] [Length 154] [Gzip -] "-" "-"
 [08/Dec/2023:17:38:11 +0000] 404 - GET http 34.67.112.237 "/.env" [Client 95.214.235.169] [Length 183] [Gzip 3.21] "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" "-"
 [08/Dec/2023:17:38:12 +0000] 405 - POST http 34.67.112.237 "/" [Client 95.214.235.169] [Length 556] [Gzip -] "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" "-"
+[08/Dec/2023:18:27:00 +0000] 200 - GET http localhost-nginx-proxy-manager "/" [Client 205.210.31.20] [Length 1033] [Gzip -] "Expanse, a Palo Alto Networks company, searches across the global IPv4 space multiple times per day to identify customers&#39; presences on the Internet. If you would like to be excluded from our scans, please send IP addresses/domains to: scaninfo@paloaltonetworks.com" "-"
