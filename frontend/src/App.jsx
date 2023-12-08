@@ -8,7 +8,7 @@ function App() {
   const [usuarios, setUsuarios] = useState([]);
   const [nombre, setNombre] = useState();
   const [csrfToken, setCsrfToken] = useState('');
-  const direccion = "http://localhost:3000"
+  const direccion = "http://34.67.112.237:3000"
 
   const datos = async () =>{
     try {
