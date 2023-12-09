@@ -1,18 +1,5 @@
-version: '3.0'
+version: '3.8'
 services:
-  app:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: npm
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
-    networks:
-      - my_network
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -48,16 +35,6 @@ services:
       - db
     networks:
       - my_network
-  apache:
-    restart: always
-    build: 
-      context: ./apache
-      dockerfile: Dockerfile
-    container_name: apache
-    ports:
-      - 9000:80
-    networks:
-      - my_network
   backend:
     restart: always
     build:
@@ -70,16 +47,6 @@ services:
       - my_network
     depends_on:
       - db
-  frontend:
-    restart: always
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    ports:
-      - "4000:4000"
-    networks:
-      - my_network
 volumes:
   mysql-data:
   init:
