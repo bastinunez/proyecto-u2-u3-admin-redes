@@ -5,7 +5,7 @@ function App() {
   const [usuarios, setUsuarios] = useState([]);
   const [nombre, setNombre] = useState();
   const [csrfToken, setCsrfToken] = useState('');
-  const direccion = "http://backend:3000"
+  const direccion = "http://backend:3000/api"
 
   const datos = async () =>{
     try {
