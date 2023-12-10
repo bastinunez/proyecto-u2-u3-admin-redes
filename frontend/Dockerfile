@@ -1,5 +1,5 @@
 # etapa de compilación
-FROM node:14 as build-stage
+FROM node:18 as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -8,7 +8,7 @@ RUN npm run build
 
 # etapa de producción
 FROM httpd:2.4 as production-stage
-COPY --from=build-stage /app/dist /usr/local/apache2/htdocs
+COPY --from=build-stage /app/build /usr/local/apache2/htdocs
 COPY httpd.conf /usr/local/apache2/conf
 EXPOSE 80
 
