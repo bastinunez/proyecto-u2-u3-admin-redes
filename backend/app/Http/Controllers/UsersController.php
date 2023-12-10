@@ -20,10 +20,10 @@ class UsersController extends Controller
             return back()->with("error","usuario no se registro");
         }
     }
-    public function get_view(){
+    public function get_nombre(){
         $consulta = "SELECT * FROM usuarios";
         $resultados = DB::select($consulta);
-        return view("welcome",compact("resultados"));
+        return response()->json($resultados);
     }
     // En tu controlador
     public function getCsrfToken()

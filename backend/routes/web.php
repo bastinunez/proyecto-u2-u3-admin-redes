@@ -14,6 +14,7 @@ use App\Http\Controllers\UsersController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get("/",[UsersController::class,"get_view"]);
+//Route::get("/",[UsersController::class,"get_view"]);
 
+Route::get('/get_nombre',[UsersController::class,"get_nombre"]);
 Route::post('/post_nombre',[UsersController::class,"post_nombres"])->name("post_nombre");

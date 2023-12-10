@@ -35,18 +35,6 @@ services:
       - db
     networks:
       - my_network
-  apache:
-    container_name: apache
-    build: 
-      context: ./apache
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "8080:80"
-    volumes:
-      - ./backend:/usr/local/apache2/htdocs
-    networks:
-      - my_network
   backend:
     build:
       context: ./backend
@@ -58,8 +46,19 @@ services:
       - my_network
     depends_on:
       - db
-    volumes:
-      - ./backend:/usr/local/apache2/htdocs
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - my_network
+    depends_on:
+      - db
+      - backend
 volumes:
   mysql-data:
   init:
