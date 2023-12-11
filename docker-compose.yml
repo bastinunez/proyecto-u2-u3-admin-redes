@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.8'
 services:
   db:
     image: mysql
@@ -35,18 +35,7 @@ services:
       - db
     networks:
       - my_network
-  apache:
-    restart: always
-    build: 
-      context: ./apache
-      dockerfile: Dockerfile
-    container_name: apache
-    ports:
-      - 80:80
-    networks:
-      - my_network
   backend:
-    restart: always
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -58,15 +47,18 @@ services:
     depends_on:
       - db
   frontend:
-    restart: always
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
     container_name: frontend
+    build: 
+      context: ./front
+      dockerfile: Dockerfile
     ports:
-      - "4000:4000"
+      - "80:80"
+    restart: always
     networks:
       - my_network
+    depends_on:
+      - db
+      - backend
 volumes:
   mysql-data:
   init:

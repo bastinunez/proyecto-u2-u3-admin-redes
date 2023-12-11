@@ -13,17 +13,17 @@ class UsersController extends Controller
     public function post_nombres(Request $request){
         try{
             DB::table("usuarios")->insert([
-                "nombre" => $request->nombre,
+                "nombre" => $request->input('nombre')
             ]);
-            return response()->json(['message' => 'Éxito al guardar el usuario']);
+            return back()->with("success","usuario registrado correctamente");
         }catch(\Throwable $th){
-            return response()->json(['message' => 'Error al guardar el usuario', 'error' => $th->getMessage()], 500);
+            return back()->with("error","usuario no se registro");
         }
     }
-    public function get_nombres(){
+    public function get_nombre(){
         $consulta = "SELECT * FROM usuarios";
         $resultados = DB::select($consulta);
-        return $resultados;
+        return response()->json($resultados);
     }
     // En tu controlador
     public function getCsrfToken()
