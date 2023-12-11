@@ -3,11 +3,15 @@
     <h1>{{ msg }}</h1>
     <h1>Lista de Nombres</h1>
     <ul>
-      
       <li v-for="item in nombres" :key="item.id">
         {{ item.id }} - {{ item.nombre }}
       </li>
     </ul>
+    <form @submit.prevent="agregarNombre">
+      <label for="nombre">Nuevo Nombre:</label>
+      <input type="text" v-model="nuevoNombre" required>
+      <button type="submit">Agregar Nombre</button>
+    </form>
   </div>
 </template>
 
@@ -32,14 +36,30 @@ export default {
   },
   methods: {
     async obtenerNombres() {
-  try {
-    const response = await axios.get('/api/get_nombre', { withCredentials: true });
+      try {
+        const response = await axios.get('/api/get_nombre', { withCredentials: true });
 
-    console.log('Respuesta del servidor:', response);
-    this.nombres = response.data;
-  } catch (error) {
-    console.error('Error en la petición:', error);
-  }
+        //console.log('Respuesta del servidor:', response);
+        this.nombres = response.data;
+      } catch (error) {
+        console.error('Error en la petición:', error);
+      }
+    },
+    async agregarNombre() {
+      try {
+        // Realizar la solicitud POST para agregar un nuevo nombre
+        const response = await axios.post('/api/post_nombre', { nombre: this.nuevoNombre }, { withCredentials: true });
+
+        // Limpiar el campo después de agregar el nombre
+        this.nuevoNombre = "";
+
+        // Actualizar la lista de nombres
+        this.obtenerNombres();
+
+        //console.log('Respuesta del servidor:', response);
+      } catch (error) {
+        console.error('Error en la petición:', error);
+      }
     },
   },
 };
