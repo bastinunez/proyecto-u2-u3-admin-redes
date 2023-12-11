@@ -13,6 +13,11 @@
 
 <script>
 import axios from 'axios';
+// Configuración para permitir solicitudes CORS
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE';
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
+
 
 export default {
   data() {
@@ -27,22 +32,14 @@ export default {
   },
   methods: {
     async obtenerNombres() {
-      try {
-        await axios.get('http://backend:3000/get_nombre')
-        .then(response => {
-          // Manejar la respuesta del servidor (response.data)
-          console.log('Respuesta del servidor:', response.data);
-          this.nombres = response.data;  // Corregí la variable "data" a "response.data"
-        })
-        .catch(error => {
-          // Manejar errores de la petición
-          console.error('Error en la petición:', error);
-        });
+  try {
+    const response = await axios.get('/api/get_nombre', { withCredentials: true });
 
-      } catch (error) {
-        // Manejar errores de la petición
-        console.error('Error en la petición:', error);
-      }
+    console.log('Respuesta del servidor:', response);
+    this.nombres = response.data;
+  } catch (error) {
+    console.error('Error en la petición:', error);
+  }
     },
   },
 };
