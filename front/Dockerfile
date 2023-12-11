@@ -7,11 +7,11 @@ COPY . .
 RUN npm run build
 
 # etapa de producción
-FROM httpd:2.4 as production-stage
-COPY --from=build-stage /app/dist /usr/local/apache2/htdocs
-COPY httpd.conf /usr/local/apache2/conf
+FROM nginx:1.13.12-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d
 EXPOSE 80
-
+CMD ["nginx", "-g", "daemon off;"]
 
 
 # FROM node:14
